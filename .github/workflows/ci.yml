@@ -27,42 +27,55 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: api
+          submodules: recursive
+
 
       - name: Checkout api repo
         uses: actions/checkout@v3
         with:
-          repository: S-DICKSON/Laravel-6-DevSecOps
+          repository: S-DICKSON/Laravel-6-DevSecOps-API
           path: main
           submodules: recursive
 
-      - name: Copy .env for main
-        run: php -r "file_exists('main/.env') || copy('main/.env.example', 'main/.env');"
+
       - name: Install Dependencies for main
         run: cd main && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Generate key for main
-        run: cd main && php artisan key:generate
+
       - name: Directory Permissions for main
         run: cd main && chmod -R 777 storage bootstrap/cache
-#      - name: Create testing database
-#        env:
-#          DB_CONNECTION: mysql
-#          DB_DATABASE: test
-#          DB_USERNAME: root
-#          DB_PASSWORD: password
-#          DB_PORT: 3306
-#        run: cd main && php artisan migrate:fresh
 
-      - name: Copy .env for api
-        run: php -r "file_exists('api/.env') || copy('api/.env.example', 'api/.env');"
-      - name: Install Dependencies for api
+      - name: Clear Config 🗑️
+        run: |
+          cd main && php artisan config:clear
+          php artisan cache:clear
+
+      - name: Prepare the application 🔧
+        run: |
+          cd main && cp .env.ci .env
+          php artisan key:generate
+
+      - name: Migrate and seed database
+        run: cd main && php artisan migrate --seed
+
+        #API SETUP
+
+      - name: Install Dependencies for API
         run: cd api && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Generate key for api
-        run: cd api && php artisan key:generate
-      - name: Directory Permissions for api
+
+      - name: Directory Permissions for main
         run: cd api && chmod -R 777 storage bootstrap/cache
 
+      - name: Clear Config 🗑️
+        run: |
+          cd api && php artisan config:clear
+          php artisan cache:clear
 
-      - name: Execute tests API repo via PHPUnit
+      - name: Prepare the application 🔧
+        run: |
+          cd api && cp .env.ci .env
+          php artisan key:generate
+
+      - name: Execute tests api repo via PHPUnit
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: test
