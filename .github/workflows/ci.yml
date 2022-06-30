@@ -30,10 +30,10 @@ jobs:
           submodules: recursive
 
 
-      - name: Checkout api repo
+      - name: Checkout main repo
         uses: actions/checkout@v3
         with:
-          repository: S-DICKSON/Laravel-6-DevSecOps-API
+          repository: S-DICKSON/Laravel-6-DevSecOps
           path: main
           submodules: recursive
 
