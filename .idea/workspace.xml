@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c269f023-4bec-4757-b2cc-536fc4c07ac5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/devsecops.api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/devsecops.api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../devsecops/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../devsecops/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../devsecops/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/../devsecops/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../devsecops/tests/Feature/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/../devsecops/tests/Feature/ExampleTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +19,7 @@
     <execution />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../devsecops" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -165,7 +161,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1656577313264</updated>
-      <workItem from="1656577315112" duration="3880000" />
+      <workItem from="1656577315112" duration="3937000" />
     </task>
     <servers />
   </component>
