@@ -103,5 +103,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="devsecops" />
+    <orderEntry type="module" module-name="dashboard.groundwow" />
   </component>
 </module>
