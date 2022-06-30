@@ -1,0 +1,73 @@
+name: Laravel Testing with MySql DB
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: api
+
+      - name: Checkout api repo
+        uses: actions/checkout@v3
+        with:
+          repository: S-DICKSON/Laravel-6-DevSecOps
+          path: main
+          submodules: recursive
+
+      - name: Copy .env for main
+        run: php -r "file_exists('main/.env') || copy('main/.env.example', 'main/.env');"
+      - name: Install Dependencies for main
+        run: cd main && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Generate key for main
+        run: cd main && php artisan key:generate
+      - name: Directory Permissions for main
+        run: cd main && chmod -R 777 storage bootstrap/cache
+      - name: Create testing database
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          DB_PORT: 3306
+        run: cd main && php artisan migrate:fresh
+
+      - name: Copy .env for api
+        run: php -r "file_exists('api/.env') || copy('api/.env.example', 'api/.env');"
+      - name: Install Dependencies for api
+        run: cd api && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Generate key for api
+        run: cd api && php artisan key:generate
+      - name: Directory Permissions for api
+        run: cd api && chmod -R 777 storage bootstrap/cache
+
+
+      - name: Execute tests API repo via PHPUnit
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: test
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          DB_PORT: 3306
+
+        run: cd api && vendor/bin/phpunit
